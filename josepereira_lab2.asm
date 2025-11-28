@@ -55,7 +55,7 @@ inicio:
     MOV BH, 00h   ; Pagina de video (normalmente 0)
     MOV DH, 0     ; Fila (posicion vertical)
     MOV DL, 5     ; Columna (posicion horizontal)
-    INT 10h       ; Llamada a la interrupción de video     
+    INT 10h       ; Llamada a la interrupcion de video     
     
   ; Mostrar el menu
     

@@ -6,10 +6,10 @@
 
 .data
 menu db "========= M E N U =========", 0dh, 0ah, 
-      db  "1. Opcion 1", 0dh, 0ah, 
-      db  "2. Opcion 2", 0dh, 0ah, 
-      db  "3. Salir", 0dh, 0ah, 
-      db  "$"
+    db  "1. Opcion 1", 0dh, 0ah, 
+    db  "2. Opcion 2", 0dh, 0ah, 
+    db  "3. Salir", 0dh, 0ah, 
+    db  "$"
 
 msg1 db "Opcion 1: Hola$",0
 msg2 db "Opcion 2: Adios$",0
@@ -43,12 +43,12 @@ main proc
     mov dx, 199
     int 33h
 
-    ; Posicionar cursor y mostrar el menú en filas conocidas
+    ; Posicionar cursor y mostrar el menï¿½ en filas conocidas
     ; Ponemos el menu desde la fila 5 (0-based), opciones en 6,7,8
     mov ah, 02h          ; set cursor position
-    mov bh, 0            ; página 0
+    mov bh, 0            ; pï¿½gina 0
     mov dh, 5            ; fila 5
-    mov dl, 10           ; columna 10 (ajústalo si quieres)
+    mov dl, 10           ; columna 10 (ajï¿½stalo si quieres)
     int 10h
 
     mov dx, offset menu

@@ -5,11 +5,11 @@ include 'libreria.inc'
 .stack 64
 
 .DATA  
- 
-   nl db 0Dh, 0Ah, '$' 
-   buffer_nombre db 50, 0, 49 dup (0)
-   
-   menu db "========= C A L C U L A D O R A =========", 0dh, 0ah,
+
+  nl db 0Dh, 0Ah, '$' 
+  buffer_nombre db 50, 0, 49 dup (0)
+
+  menu db "========= C A L C U L A D O R A =========", 0dh, 0ah,
         db "ELIJA LA OPERACION A REALIZAR", 0dh, 0ah, 
         db "1. Suma", 0dh, 0ah, 
         db "2. Resta", 0dh, 0ah,
@@ -36,14 +36,14 @@ include 'libreria.inc'
     divv DB 0
     salto_linea DB 0dh, 0ah, "$"
     
-.code 
- 
+.code
+
 main proc      
     mov ax, @data
     mov ds, ax
 
 inicio:     
-   mostrar_menu:
+    mostrar_menu:
     mov ax,0600h ;limpiar pantalla
     mov bh,1fh ;1 color de fondo azul, f color de letra blanco
     mov cx,0000h
@@ -65,7 +65,7 @@ inicio:
     imprimir menu  ;MACRO
     mov ah, 01h
     int 21h   
-     
+
     sub al, '0'
     cmp al, 1
       je operacion_suma

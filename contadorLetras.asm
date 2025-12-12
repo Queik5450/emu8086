@@ -4,17 +4,16 @@
 .stack 64
 .data 
 ; --- DATOS ---          
-  cadena  DB 100 DUP(' '),'$'   
-  prompt_msg      db 'Ingrese una cadena (max 100 chars):$'
-  result_msg      db 0ah, 0dh, 'El numero de palabras es: $' ; Salto de linea.
-  result2_msg     db 0ah, 0dh, 'El numero de letras es: $' ; Salto de linea.
+    cadena  DB 100 DUP(' '),'$'   
+    prompt_msg      db 'Ingrese una cadena (max 100 chars):$'
+    result_msg      db 0ah, 0dh, 'El numero de palabras es: $' ; Salto de linea.
+    result2_msg     db 0ah, 0dh, 'El numero de letras es: $' ; Salto de linea.
 
 .code  
 main proc 
     MOV AX, @DATA
     MOV DS, AX
-  
- 
+
     start:
         ; MENSAJE DE SOLICITUD 
         mov ah, 9
@@ -54,7 +53,7 @@ main proc
         cmp al, ' '            ; Comparar AL con el codigo ASCII del espacio.
         je is_space            ; si es igual va 
         
-        ; 2. NO ES ESPACIO (estamos en un carácter de palabra)
+        ; 2. NO ES ESPACIO (estamos en un carï¿½cter de palabra)
         ; Estabamos en un espacio antes? (AH = 1)
         cmp ah, 1     ; si es igual va 
         je new_word
@@ -68,11 +67,11 @@ main proc
         jmp continue_loop
     
     new_word:
-        inc bx                 ; ¡Incrementar el contador de PALABRAS! (BX)
+        inc bx                 ; ï¿½Incrementar el contador de PALABRAS! (BX)
         mov ah, 0              ; Establecer flag AH = 0 (Estamos ahora en una PALABRA).
         
     continue_loop:
-        inc si                 ; Avanzar al siguiente carácter.
+        inc si                 ; Avanzar al siguiente carï¿½cter.
         loop word_count_loop   ; Decrementar CX y saltar si CX != 0.
     
     
@@ -144,6 +143,5 @@ main proc
         int 21h
         
         loop print_decimal_words
-             
     
- main endp   
+main endp   

@@ -49,36 +49,34 @@ main proc near
         div bx
         or dx,3030h  
         push dx
-        sub dx,dx 
-  
+        sub dx,dx
         dec cx
         cmp cx,0
         jnz ciclo1:
 
-   ;El ultimo digito queda en ax
+        ;El ultimo digito queda en ax
         or ax,3030h
         push ax
 
-   ;Mostrar ano en pantalla
+        ;Mostrar ano en pantalla
         mov cx,4
     
     ciclo2: 
     pop dx
     mov ah,02h
     int 21h
-   
     dec cx
     cmp cx,0
     jnz ciclo2:
 
 
 
-   ;Terminar el programa
+    ;Terminar el programa
     mov ah, 4Ch
     mov al, 00
     int 21h
-   
-   ;Convertir valor a ascii
+
+    ;Convertir valor a ASCII
     disp proc 
         mov dl, bh
         add dl, 30h

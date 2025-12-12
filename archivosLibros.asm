@@ -3,11 +3,11 @@
 .model small
 .stack 64
 .data 
-     
+
     bookTitle            DB 30 DUP('$')   
     bookAuthor           DB 30 DUP('$')     
-    publicationYear  DB 30 DUP('$')  
-         
+    publicationYear      DB 30 DUP('$')  
+
     titleMessage             DB 10,13, "Ingrese titulo del libro: $"
     authorMessage            DB 10,13, "Ingrese autor del libro: $"
     publicationYearMessage   DB 10,13, "Ingrese ano de publicacion: $"
@@ -24,7 +24,7 @@
     filename db 'libro.txt', 0  ; Nombre del archivo
     handle dw ? ;Identificador del archivo a nivel de s.o
     length dw ?
-                                 
+
 .code 
 main proc    
 
@@ -56,7 +56,6 @@ main proc
     LEA DX, bookAuthor
     INT 21h
     
-       
     ; Solicitar ano publicacion   
     MOV DX, OFFSET publicationYearMessage
     MOV AH, 09h
@@ -91,16 +90,13 @@ main proc
     mov bx, [handle]  
     mov cl, [bookAuthor + 1]  
     int 21h
-   
     
     lea dx, publicationYear + 2     
     mov ah, 40h       
     mov bx, [handle]  
     mov cl, [publicationYear + 1]  
     int 21h
-   
     
-       
     ; Cerrar el archivo
     mov ah, 3Eh       ; Funcion 3Eh: Cerrar archivo
     mov bx, [handle]  ; Identificador del archivo
@@ -205,11 +201,10 @@ main proc
     mov bx, handle
     mov ah, 3eh
     int 21h
-      
     ; Finalizar el programa
     MOV AH, 4Ch
-    INT 21h 
-                       
+    INT 21h
+    
 main endp   
 
 ; ---------------------------------------------

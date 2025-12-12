@@ -1,5 +1,3 @@
-include 'emu8086.inc'
-
 .model small
 .stack 100h
 
@@ -16,6 +14,7 @@ include 'emu8086.inc'
     wPrice          dw 0
     wDiscount       dw 0
     wFinal          dw 0
+    wPercent        dw 0
 
     ; --- TEXTOS PARA ARCHIVO Y PANTALLA ---
     txtId           db 'ID: $'
@@ -23,7 +22,8 @@ include 'emu8086.inc'
     txtAddr         db 'Direccion: $'
     txtAge          db 'Edad: $'
     txtPrice        db 'Compra: $'
-    txtDisc         db 'Descuento: $'
+    txtPerc         db 'Descuento (%): $'
+    txtDisc         db 'Monto Desc.: $'
     txtTotal        db 'Total: $'
     newline         db 13, 10, '$'
     
@@ -180,6 +180,7 @@ calcular_descuento proc
     jae desc_10
     
     ; 5% -> Precio / 20
+    mov wPercent, 5
     mov ax, wPrice
     mov bx, 20
     xor dx, dx
@@ -189,6 +190,7 @@ calcular_descuento proc
     
 desc_10:
     ; 10% -> Precio / 10
+    mov wPercent, 10
     mov ax, wPrice
     mov bx, 10
     xor dx, dx
@@ -245,6 +247,13 @@ guardar_archivo proc
     lea dx, txtPrice
     call escribir_cadena
     mov ax, wPrice
+    call num_to_str_file
+    call escribir_newline
+
+    ; Porcentaje
+    lea dx, txtPerc
+    call escribir_cadena
+    mov ax, wPercent
     call num_to_str_file
     call escribir_newline
     

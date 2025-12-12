@@ -1,10 +1,12 @@
+; Calculadora simple que suma, resta, multiplica y divide dos nmeros de un solo digito
 include 'libreria.inc'
 
 .model small
 .stack 64
 
 .DATA  
-
+ 
+   nl db 0Dh, 0Ah, '$' 
    buffer_nombre db 50, 0, 49 dup (0)
    
    menu db "========= C A L C U L A D O R A =========", 0dh, 0ah,
@@ -42,20 +44,20 @@ main proc
 
 inicio:     
    mostrar_menu:
-    mov ax,0600h ; Limpiar pantalla
-    mov bh,1fh   ;1 Color de fondo azul, f color de letra blanco
+    mov ax,0600h ;limpiar pantalla
+    mov bh,1fh ;1 color de fondo azul, f color de letra blanco
     mov cx,0000h
     mov dx,184Fh
     int 10h   
     
 
     
-  ; Colocar coordenada donde aparecera el Menu
+  ; colocar coordenada donde aparecera el Menu
     MOV AH, 02h   ; Funcion para mover el cursor
     MOV BH, 00h   ; Pagina de video (normalmente 0)
     MOV DH, 0     ; Fila (posicion vertical)
     MOV DL, 5     ; Columna (posicion horizontal)
-    INT 10h       ; Llamada a la interrupcion de video     
+    INT 10h       ; Llamada a la interrupci�n de video     
     
   ; Mostrar el menu
     
@@ -75,7 +77,7 @@ inicio:
       je operacion_div
     cmp al, 5
       je salir
-    jmp mostrar_menu
+      ;jmp mostrar_menu
 
 operacion_suma:
     call pedir_numeros
@@ -91,7 +93,7 @@ operacion_suma:
     MOV AL, suma
     AAM  ; separar el contenido de un registro en decenas y unidades decimales.
     ;Cuando ejecutas AAM (sin operandos), toma el valor que esta en AL
-    ; (normalmente el resultado de una multiplicacion), y lo convierte en 
+    ; (normalmente el resultado de una multiplicaci�n), y lo convierte en 
     ; dos digitos decimales:  
     ;El valor en AL se divide entre 10
     ;Coloca el cociente en AH,representa las decenas.
@@ -144,11 +146,8 @@ resta_positiva:
     MOV r[1], AL
     MOV DX, OFFSET r
     MOV AH, 09h 
-    INT 21h
-    
-    imprimir salto_linea
-    PresioneTecla mensajeSaltar
     jmp mostrar_menu
+    INT 21h
     
 operacion_multi:
     call pedir_numeros
@@ -207,7 +206,6 @@ salir:
 
 pedir_numeros PROC
     imprimir salto_linea ;Salto de linea
-    
     ; Solicitar primer numero
     MOV DX, OFFSET mensaje1
     MOV AH, 09h
@@ -219,7 +217,7 @@ pedir_numeros PROC
     MOV num1, AL
     imprimir salto_linea ;Salto de linea
     
-    ; Solicitar segundo numero 
+    ; Solicitar segundo numero
     MOV DX, OFFSET mensaje2
     MOV AH, 09h
     INT 21h
@@ -228,8 +226,10 @@ pedir_numeros PROC
     INT 21h
     SUB AL, 30h
     MOV num2, AL
-    
     imprimir salto_linea ;Salto de linea
     ret
     
 pedir_numeros ENDP
+
+
+

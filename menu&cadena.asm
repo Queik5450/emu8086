@@ -1,3 +1,5 @@
+; Programa en ensamblador que muestra un menu con opciones para mostrar un mensaje fijo,
+; leer una cadena de texto caracter por caracter y mostrarla, o salir del programa.
 .model small
 .stack 100h
 
